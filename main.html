@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Assignment 2 </title>
+  <!--  <link rel="stylesheet" href="/css/styles.css" type="text/css"> -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+  body { background: #fdfdfd !important; }
+
+  div {
+    height: 200px;
+    width: 400px;
+
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+}
+
+  </style>
+  </head>
+  <body>
+    {% if user %}
+    <p>Click here to <a  href='{{url}}'> {{url_string}}</a></p>
+    <p><a href="/addWord">Add word</a></p>
+    <form class="" action="/" method="post">
+    <input type="text" name="search_word" pattern = "[A-Za-z]+" value="">
+    <input type="submit" name="search_button" value="Search">
+    </form>
+    <p>
+    {% for i in list %}
+      {{i}}
+      <br/>
+    {% endfor %}
+
+    </p>
+    {%else%}
+    <div class="text-center">
+    <h2>Welcome to Gpu databases</h2>
+
+    <p>Click here to <a  href='{{url}}'> {{url_string}} </a></p>
+    </div>
+    {% endif %}
+
+    <br/>
+
+
+    <br/>
+
+</body>
