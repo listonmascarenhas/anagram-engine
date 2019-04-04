@@ -24,7 +24,11 @@
   <body>
     <form action="/subAnagram" method="post">
     <input type="text" name="search_word" pattern = "[A-Za-z]{3,}" value="">
-    <input type="submit" name="search_button" value="Search">
+    <input type="submit" name="button" value="Search">
     </form>
+    {% for i in blank %}
+    <p class="ml-3">
+      {{i}}</p>
+    {% endfor %}
   </body>
 </html>

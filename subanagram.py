@@ -12,43 +12,37 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class SubAnagram(webapp2.RequestHandler):
     def get(self):
-        # def sub_anagram(word,length,blank):
-        #     if len(word)<3:
-        #         return blank
-        #     else:
-        #         for i in word[:]:
-        #             list = word[:]
-        #             list.remove(i)
-        #             reduced_word = ''.join(list)
-        #             logging.info('yo'+reduced_word)
-        #             blank.append(reduced_word)
-        #         return sub_anagram(list,length,blank)
-
-        def sub_anagram(blank,count):
-
-            if len(blank[count])<=3:
-                if count ==20:
-                    return blank
-            else:
-                word = list(blank[count])
-                for i in word[:]:
-                    temp_list = word[:]
-                    temp_list.remove(i)
-                    reduced_word = ''.join(temp_list)
-                    logging.info(str(count)+':::'+i+':::'+reduced_word)
-                    if reduced_word not in blank:
-                        blank.append(reduced_word)
-                count = count+1
-                return sub_anagram(blank,count)
         self.response.headers['Content-Type'] = 'text/html'
         template = JINJA_ENVIRONMENT.get_template('subanagram.html')
-        word = 'glare'
-        word = sortWord(word)
-        #word = sorted(word)
-        blank = [word]
-        # for i in word[:]:
-        #     list = word[:]
-        #     list.remove(i)
-        #sub_anagram(word,len(word),blank)
-        sub_anagram(blank,0)
-        self.response.write(blank)
+        self.response.write(template.render())
+
+    def post(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        action = self.request.get('button')
+        if action == 'Search':
+            def sub_anagram(blank,count):
+
+                if len(blank[count])<=3:
+                    return blank
+                else:
+                    word = list(blank[count])
+                    if count is 0:
+                        del blank[count]
+                    for i in word[:]:
+                        temp_list = word[:]
+                        temp_list.remove(i)
+                        reduced_word = ''.join(temp_list)
+                        logging.info(str(count)+':::'+i+':::'+reduced_word)
+                        if reduced_word not in blank:
+                            blank.append(reduced_word)
+                    count = count+1
+                    return sub_anagram(blank,count)
+            word = self.request.get('search_word')
+            word = sortWord(word)
+            blank = [word]
+            sub_anagram(blank,0)
+            template_values = {
+                'blank': blank
+            }
+            template = JINJA_ENVIRONMENT.get_template('subanagram.html')
+            self.response.write(template.render(template_values))
