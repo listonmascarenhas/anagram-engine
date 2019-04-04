@@ -22,35 +22,9 @@
   </style>
   </head>
   <body>
-    {% if user %}
-    <p>Click here to <a  href='{{url}}'> {{url_string}}</a></p>
-    <p><a href="/addWord">Add word</a></p>
-    <p> <a href="/subAnagram">SubAnagram</a> </p>
-    <form class="" action="/" method="post">
+    <form action="/subAnagram" method="post">
     <input type="text" name="search_word" pattern = "[A-Za-z]{3,}" value="">
     <input type="submit" name="search_button" value="Search">
     </form>
-    Word count:{{user_words}}
-    <br>
-    Anagram count:{{user_anagrams}}
-    <p>
-    {% for i in list %}
-      {{i}}
-      <br/>
-    {% endfor %}
-
-    </p>
-    {%else%}
-    <div class="text-center">
-    <h2>Welcome to Gpu databases</h2>
-
-    <p>Click here to <a  href='{{url}}'> {{url_string}} </a></p>
-    </div>
-    {% endif %}
-
-    <br/>
-
-
-    <br/>
-
-</body>
+  </body>
+</html>
