@@ -72,7 +72,8 @@ class AddWord(webapp2.RequestHandler):
             file = self.request.POST['file']
             new_words=file.value.split('\\n')
             for add_word in new_words:
-                addWord(add_word)
+                if(len(add_word)>3):
+                    addWord(add_word)
             self.redirect('/addWord')
         elif action == 'Back':
             self.redirect('/')

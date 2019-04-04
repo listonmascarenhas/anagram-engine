@@ -39,9 +39,12 @@ class MainPage(webapp2.RequestHandler):
                 user_key_word = user.user_id()+search_word
                 anagram_key = ndb.Key('Anagram',user_key_word)
                 anagram=anagram_key.get()
-                list = anagram.anagram_list
-
-
+                if anagram != None:
+                    list = anagram.anagram_list
+                else:
+                    list = []
+            else:
+                list = []
             user_words = myuser.user_words
             user_anagrams=myuser.user_anagrams
 
