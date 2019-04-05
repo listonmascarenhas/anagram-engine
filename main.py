@@ -41,10 +41,13 @@ class MainPage(webapp2.RequestHandler):
                 anagram=anagram_key.get()
                 if anagram != None:
                     list = anagram.anagram_list
+                    error = ''
                 else:
                     list = []
+                    error = 'No words found in database'                
             else:
                 list = []
+                error = 'Input cannot be empty'
             user_words = myuser.user_words
             user_anagrams=myuser.user_anagrams
 
@@ -60,6 +63,7 @@ class MainPage(webapp2.RequestHandler):
             'list' : list,
             'user_words' : user_words,
             'user_anagrams' : user_anagrams,
+            'error' : error
         }
         template = JINJA_ENVIRONMENT.get_template('main.html')
         self.response.write(template.render(template_values))

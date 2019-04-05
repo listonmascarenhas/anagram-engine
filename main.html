@@ -23,21 +23,28 @@
   </head>
   <body>
     {% if user %}
-    <p>Click here to <a  href='{{url}}'> {{url_string}}</a></p>
-    <p><a href="/addWord">Add word</a></p>
-    <p> <a href="/subAnagram">SubAnagram</a> </p>
-    <form class="" action="/" method="post">
+    <table style="width:100%" class="text-center mt-3 mb:3" >
+    <tr>
+    <td> <a href="/addWord">Add word</a> </td>
+    <td> <a href="/subAnagram">SubAnagram</a> </td>
+    <td>  <a href='{{url}}'> Logout </a> </td>
+    </tr>
+  </table>
+  <p class="mt-5 text-center">
+  Word count:{{user_words}}
+<br>
+  Anagram count:{{user_anagrams}}</p>
+    <form class="text-center mt-4" action="/" method="post">
     <input type="text" name="search_word" pattern = "[A-Za-z]{3,}" value="">
     <input type="submit" name="search_button" value="Search">
     </form>
-    Word count:{{user_words}}
-    <br>
-    Anagram count:{{user_anagrams}}
-    <p>
+      <p class="text-center">{{error}}</p>
+      <ul class="text-center list-group" style="list-style-type:none">
     {% for i in list %}
-      {{i}}
-      <br/>
-    {% endfor %}
+      <li class=" list-group-item ">{{i}}</li>
+      {% endfor %}
+      </ul>
+
 
     </p>
     {%else%}
