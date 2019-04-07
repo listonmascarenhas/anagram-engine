@@ -5,32 +5,39 @@
   <!--  <link rel="stylesheet" href="/css/styles.css" type="text/css"> -->
   <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-  body { background: #fdfdfd !important; }
+  body { background: #212121 !important; }
 
-  div {
-    height: 200px;
-    width: 400px;
+  #container {
+    height: 100%;
+    width: 100%;
 
 
     position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;
+    top: 2%;
+
+}
+.list-group-item {
+background-color: transparent;
+color: #e6ffff;
+border-bottom: 1px solid #e6ffff;
 }
 
   </style>
   </head>
   <body>
+    <div id='container' class="text-light">
     {% if user %}
-    <table style="width:100%" class="text-center mt-3 mb:3" >
+    <table style="width:100%" class="text-center mt-3 mb:3 " >
     <tr>
-    <td> <a href="/addWord">Add word</a> </td>
-    <td> <a href="/subAnagram">SubAnagram</a> </td>
-    <td>  <a href='{{url}}'> Logout </a> </td>
+    <td> <a class="text-info" href="/addWord">Add word</a> </td>
+    <td> <a class="text-info" href="/subAnagram">SubAnagram</a> </td>
+    <td>  <a class="text-info" href='{{url}}'> Logout </a> </td>
     </tr>
   </table>
   <p class="mt-5 text-center">
+    <div class="text-center">
+
+
   Word count:{{user_words}}
 <br>
   Anagram count:{{user_anagrams}}</p>
@@ -41,23 +48,24 @@
       <p class="text-center">{{error}}</p>
       <ul class="text-center list-group" style="list-style-type:none">
     {% for i in list %}
-      <li class=" list-group-item ">{{i}}</li>
+      <li class=" list-group-item  ">{{i}}</li>
       {% endfor %}
       </ul>
 
 
     </p>
     {%else%}
-    <div class="text-center">
+    <div id ='container'class="text-center">
     <h2>Welcome to Anagram Machine</h2>
 
     <p>Click here to <a  href='{{url}}'> {{url_string}} </a></p>
-    </div>
     {% endif %}
+  </div>
+      </div>
 
     <br/>
 
 
     <br/>
-
+    </div>
 </body>

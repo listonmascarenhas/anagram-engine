@@ -28,28 +28,32 @@ class AddWord(webapp2.RequestHandler):
         action = self.request.get('button')
         template = JINJA_ENVIRONMENT.get_template('addword.html')
         error = ''
-        if action =='Add word' :
+        if action =='Add Word' :
             add_word = self.request.get('add_word')
             if add_word != '':
-                addWord(add_word)
+                error = addWord(add_word)
+
             else:
                 error = 'Cannot input empty string'
-            template_values={'error':error}
-            self.response.write(template.render(template_values))
 
-        elif action == 'Submit':
+
+        elif action == 'Submit File':
             file = self.request.POST['file']
             if file != '':
                 new_words=file.value.split('\n')
                 for add_word in new_words:
-                    if(len(add_word)>3):
+                    if(len(add_word)>=3):
                         addWord(add_word.rstrip())
+                        error = 'Words added'
+
+
             else :
                 error = 'Choose a file to upload'
-            template_values={'error':error}
-            self.response.write(template.render(template_values))
+
         elif action == 'Back':
             self.redirect('/')
+        template_values={'error':error}
+        self.response.write(template.render(template_values))
 
     def addWord(add_word):
         user = users.get_current_user()
@@ -59,6 +63,7 @@ class AddWord(webapp2.RequestHandler):
         user_key_word = user.user_id() + sorted_word
         anagram_key = ndb.Key('Anagram',user_key_word)
         anagram = anagram_key.get()
+        error = 'Word added to dictionary'
         if anagram==None:
             anagram_list = []
             anagram_letter_count = []
@@ -76,6 +81,7 @@ class AddWord(webapp2.RequestHandler):
             if  add_word  in anagram_list:
                 count = anagram.anagram_count
                 user_words = my_user.user_words
+                error = 'Added word already in dictionary'
 
             else:
                 count = anagram.anagram_count + 1
@@ -87,3 +93,4 @@ class AddWord(webapp2.RequestHandler):
         my_user = MyUser( id = user.user_id(), user_words = user_words, user_anagrams= user_anagrams,email_address=user.email())
         anagram.put()
         my_user.put()
+        return error

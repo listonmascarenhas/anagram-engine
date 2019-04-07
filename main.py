@@ -20,7 +20,8 @@ class MainPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         url = ''
         url_string = ''
-        list = ''
+        list = []
+        error = ''
         user=users.get_current_user()
 
         if user:
@@ -41,13 +42,11 @@ class MainPage(webapp2.RequestHandler):
                 anagram=anagram_key.get()
                 if anagram != None:
                     list = anagram.anagram_list
-                    error = ''
+
                 else:
-                    list = []
-                    error = 'No words found in database'                
-            else:
-                list = []
-                error = 'Input cannot be empty'
+
+                    error = 'No words found in database'
+
             user_words = myuser.user_words
             user_anagrams=myuser.user_anagrams
 

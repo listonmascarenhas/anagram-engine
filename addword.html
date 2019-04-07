@@ -4,18 +4,40 @@
     <meta charset="utf-8">
     <title>Add Word</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    body { background: #212121 !important; }
+
+    #container {
+      height: 100%;
+      width: 100%;
+
+
+      position: fixed;
+      top: 5%;
+
+  }
+  .list-group-item {
+  background-color: transparent;
+  color: #e6ffff;
+  border-bottom: 1px solid #e6ffff;
+  }
+
+    </style>
   </head>
   <body>
-  <form  action="/addWord" method="post">
+    <div id='container' class="text-light text-center">
+      <h1> Add words to the dictionary </h1>
+  <form  class="mt-5" action="/addWord" method="post">
     <input type="text" name="add_word" pattern = "[A-Za-z]{3,}" value="">
-    <input type="submit" name="button" value="Add word">
+    <input type="submit" name="button" value="Add Word">
   </form>
-  <br>
+  <p>or</p>
   <form action="/addWord" method="post" enctype="multipart/form-data">
      Upload File: <input type="file" name="file" /><br/>
-     <input type="submit" name = "button" value = "Submit"/>
+     <input type="submit" name = "button" value = "Submit File" class="mt-3 mr-1"/>
      <input type="submit" name="button" value="Back">
    </form>
   <p>{{error}}</p>
   </body>
+  </div>
 </html>

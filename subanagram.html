@@ -5,31 +5,38 @@
   <!--  <link rel="stylesheet" href="/css/styles.css" type="text/css"> -->
   <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-  body { background: #fdfdfd !important; }
+  body { background: #212121 !important; }
 
-  div {
-    height: 200px;
-    width: 400px;
+  #container {
+    height: 100%;
+    width: 100%;
 
 
     position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;
-}
+    top: 2%;
 
+}
+.list-group-item {
+background-color: transparent;
+color: #e6ffff;
+border-bottom: 1px solid #e6ffff;
+}
   </style>
   </head>
   <body>
-    <form action="/subAnagram" method="post">
+      <div class=" mt-3 text-center text-light" id='container' >
+      <h1>Search Sub Anagrams</h1>
+    <form  class="text-center mt-5" action="/subAnagram" method="post">
     <input type="text" name="search_word" pattern = "[A-Za-z]{3,}" value="">
-    <input type="submit" name="button" value="Search">
+    <br>
+    <input class="mt-3"type="submit" name="button" value="Search">
     <input type="submit" name="button" value="Back">
     </form>
+      <ul class="text-center list-group" style="list-style-type:none">
     {% for i in all_sub_anagrams_list %}
-    <p class="ml-3">
-      {{i}}</p>
+      <li class=" list-group-item ">{{i}}</li>
     {% endfor %}
+      </ul>
+    </div>
   </body>
 </html>
