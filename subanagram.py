@@ -62,8 +62,6 @@ class SubAnagram(webapp2.RequestHandler):
                     for word in anagram_list:
                         list_datastore.append(word)
 
-                else:
-                    all_sub_anagrams_list = ''
             template_values = {
                 'all_sub_anagrams_list': list_datastore
             }

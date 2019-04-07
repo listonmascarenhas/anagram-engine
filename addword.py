@@ -87,7 +87,7 @@ class AddWord(webapp2.RequestHandler):
                 count = anagram.anagram_count + 1
                 anagram_list.append(add_word)
                 anagram_letter_count.append(len(add_word))
-                user_words = my_user.user_words +    1
+                user_words = my_user.user_words + 1
 
         anagram = Anagram(id = user_key_word ,anagram_count=count, anagram_list = anagram_list,anagram_letter_count = anagram_letter_count)
         my_user = MyUser( id = user.user_id(), user_words = user_words, user_anagrams= user_anagrams,email_address=user.email())
